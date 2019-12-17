@@ -21,7 +21,6 @@ router.post('/add', (req, res) => {
         //lot
             if (numLot.length != 5){
                 errors.push({msg: "Le numéro de lot doit être composé de 5 chiffres"});
-
             }
         
             //send errors
@@ -65,70 +64,67 @@ router.post('/add', (req, res) => {
 
 
 //Page search
-router.post('/search', (req, res)=>{
+router.post('/searchLot', (req, res)=>{
 
-    var {lot, prixMin, prixMax, searchLot, searchPrix, all} = req.body;
+    var {lot, numLot} = req.body;
 
     let errors = [];
-
-
-    if(searchLot){
-        //Find article by lot
-        Articles.find({numlot:lot})
-        .then(article => {
-            if(article[0] == null){
-                errors.push({ msg: 'Aucun article trouvé'});
+ 
+        //Find products by lot
+        Product.find({numLot:lot})
+        .then(products => {
+            if(products[0] == null){
+                errors.push({ msg: 'Aucun products trouvé'});
                 res.render('search', {
                     errors,
                 });
             }else{
                 var slot = " ";
-                res.render('search', {article, slot});
+                res.render('search', {products, slot});
+                console.log(products)
             }
         })
         .catch(err =>console.log(err));
-    }
-
-    if(searchPrix){
-        if (!prixMin && prixMax){
-            prixMin = 0;
-        }
-        if (!prixMax && prixMin){
-            prixMax = 99999;
-        }
-        //Find article by prix
-        Articles.find({prix: { $gt: prixMin, $lt: prixMax}})
-        .then(article => {
-            if(article[0] == null){
-                if (!prixMin && !prixMax){
-                    errors.push({ msg: 'Entrer au moins un prix minimum ou maximum'});
-                }
-                else{
-                    errors.push({ msg: 'Aucun article trouvé'});
-                }
-
-                res.render('search', {
-                    errors,
-                });
-
-            }else{
-                var sprix = " ";
-                res.render('search', {article, sprix});
-            }
-        })
-        .catch(err =>console.log(err));
-    }
-
-    if(all){
-        //Find all
-        Articles.find()
-        .then(article => {
-                var sprix = " ";
-                res.render('search', {article, sprix});
-
-        })
-        .catch(err =>console.log(err));
-    }
     });
+
+        
+    //Find products by price
+
+router.post('/searchPrice', (req, res) =>{
+    
+    var {minPrice, maxPrice} = req.body;
+
+    let errors = [];
+
+    if (!minPrice && maxPrice){
+        minPrice = 0;
+    }
+    if (!maxPrice && minPrice){
+        maxPrice = 99999;
+    }
+    Product.find({price: { $gt: minPrice, $lt: maxPrice}})
+    .then(products => {
+        if(products[0] == null){
+            if (!minPrice && !maxPrice){
+                errors.push({ msg: 'Entrer au moins un price minimum ou maximum'});
+            }
+            else{
+                errors.push({ msg: 'Aucun products trouvé'});
+            }
+
+            res.render('search', {
+                errors,
+            });
+
+        }else{
+            var sprix = " ";
+            res.render('search', {products, sprix});
+            console.log(products)
+        }
+    })
+    .catch(err =>console.log(err));
+
+});
+
 
 module.exports = router;
