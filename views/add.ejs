@@ -1,0 +1,83 @@
+<div class="row mt-5">
+    <div class="col-md-6 m-auto">
+        <div class="card card-body">
+            <h1 class="text-center mb-3">
+            <i class="fas fa-plus"></i> Ajouter un produit
+            </h1>
+
+            <% if(typeof errors != 'undefined' ){ %>
+                <div class="col-md-9 mt-5">
+                <% errors.forEach(function(error) { %>
+                  <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <%= error.msg %>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <% }); %>
+                </div>
+             <% } %>
+            
+            <form action="/products/add" method="POST">
+                <div class="form-group">
+                    <label for="name">Nom du produit</label>
+                    <input
+                    type="name"
+                    id="name"
+                    name="name"
+                    class="form-control"
+                    placeholder="Nom du produit"
+                    required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="numLot">Numero de lot</label>
+                    <input
+                    type="number"
+                    id="number"
+                    name="numLot"
+                    class="form-control"
+                    placeholder="Numero de lot"
+                    required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="price">Prix</label>
+                    <input
+                    type="number"
+                    id="price"
+                    name="price"
+                    class="form-control"
+                    placeholder="Prix du produit"
+                    required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="resume">Description</label>
+                    <input
+                    type="longtext"
+                    id="resume"
+                    name="resume"
+                    class="form-control"
+                    placeholder="Description du produit"
+                    required
+                    />
+                </div>
+                <div class="form-group">
+                    <label for="dispo">Disponibilité</label>
+                    <input
+                    type="number"
+                    id="dispo"
+                    name="dispo"
+                    class="form-control"
+                    placeholder="Nombre de produit disponible"
+                    required
+                    />
+                </div>
+                <button type="submit" class="btn btn-secondary btn-block">
+                Ajouter
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
