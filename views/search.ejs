@@ -75,45 +75,46 @@
                         Rechercher
                     </button>
                 </form>
-                <% if(typeof sprix != 'undefined' ){ %>
-                    <div class="col-md-9 mt-5">
-                        <table align="center" border="1" style="text-align: center; width: 100%">
-                          <thead class="btn-secondary">
-                            <tr><th colspan="7">Produit(s) correspondant(s) à votre demande</th></tr>
-                          </thead>
-                          <tbody>
-                            <tr>
-                              <th>Nom</th>
-                              <th>Identifiant</th>
-                              <th>Lot n°</th>
-                              <th>Prix</th>
-                              <th>Description</th>
-                              <th>Date d'entrée en stock</th>
-                              <th>Disponibilité</th>
-                            </tr>
-                            <% products.forEach(function(pro) { %>
-                            <tr>
-                              <td><%= pro.name %></td>
                 
-                              <td><%= pro.identifiant %></td>
-                
-                              <td><%= pro.numLot %></td>
-                
-                              <td><%= pro.price %> €</td>
-                
-                              <td><%= pro.resume %></td>
-                
-                              <td><% var date = new Date(pro.date) %><%= date.toLocaleString('fr-FR') %></td>
-                
-                              <td><% if (pro.dispo == 0) { %><span style="color: red">RUPTURE</span><% } else { %><span style="color:green"><%= pro.dispo %></span><% } %></td>
-                            </tr>
-                            <% }); %>
-                          </tbody>
-                        </table>
-                      </div>
-                    <% } %>
                 </div>
             </div>
+            <% if(typeof sprix != 'undefined' ){ %>
+              <div class="col-md-9 mt-5">
+                  <table class="table table-dark">
+                    <thead class="btn-secondary">
+                      <tr><th colspan="7">Produit(s) correspondant(s) à votre demande</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <th>Nom</th>
+                        <th>Identifiant</th>
+                        <th>Lot n°</th>
+                        <th>Prix</th>
+                        <th>Description</th>
+                        <th>Date d'entrée en stock</th>
+                        <th>Disponibilité</th>
+                      </tr>
+                      <% products.forEach(function(pro) { %>
+                      <tr>
+                        <td><%= pro.name %></td>
+          
+                        <td><%= pro.identifiant %></td>
+          
+                        <td><%= pro.numLot %></td>
+          
+                        <td><%= pro.price %> €</td>
+          
+                        <td><%= pro.resume %></td>
+          
+                        <td><% var date = new Date(pro.date) %><%= date.toLocaleString('fr-FR') %></td>
+          
+                        <td><% if (pro.dispo == 0) { %><span style="color: red">RUPTURE</span><% } else { %><span style="color:green"><%= pro.dispo %></span><% } %></td>
+                      </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+                </div>
+              <% } %>
         </div>
         <% if(typeof errors != 'undefined' ){ %>
             <div class="col-md-9 mt-5">

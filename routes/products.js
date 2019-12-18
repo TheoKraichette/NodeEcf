@@ -50,11 +50,13 @@ router.post('/add', (req, res) => {
             dispo,
             date
         });
-        //Sauvegarde de l'utilisateur
+        //Sauvegarde du produit
             newProduct.save()
             .then(products =>{
-
-                res.redirect('/products/add');
+                var nice = "";
+                res.render('add', {
+                    nice
+                });
             })
             .catch(err =>console.log(err));
             }

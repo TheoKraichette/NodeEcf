@@ -33,18 +33,18 @@
                 <div class="form-group">
                     <label for="numLot">Numero de lot</label>
                     <input
-                    type="number"
+                    type="text"
                     id="number"
                     name="numLot"
                     class="form-control"
-                    placeholder="Numero de lot"
+                    placeholder="Numero de lot composé de 5 chiffres"
                     required
                     />
                 </div>
                 <div class="form-group">
                     <label for="price">Prix</label>
                     <input
-                    type="number"
+                    type="text"
                     id="price"
                     name="price"
                     class="form-control"
@@ -78,6 +78,15 @@
                 Ajouter
                 </button>
             </form>
+            <% if(typeof nice != 'undefined' ){ %>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Produit ajouté avec succes
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                <% } %>
+          </div>
         </div>
     </div>
 </div>
